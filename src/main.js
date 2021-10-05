@@ -3,13 +3,15 @@ import { Graph } from './graph.js';
 const graph = new Graph();
 
 graph.addEdges([
-  ['start', 'A', 6],
-  ['start', 'B', 2],
-  ['A', 'finish', 1],
-  ['B', 'A', 3],
-  ['B', 'finish', 5],
+  ['A', 'B', 6],
+  ['C', 'B', 2],
+  ['A', 'C', 1],
+  ['D', 'A', 3],
+  ['C', 'D', 5],
 ]);
 
-const result = graph.dijkstra('start');
+const { distances, parents } = graph.dijkstra('A');
 
-console.log(result);
+const cost = [...distances.values()].reduce((acc, value) => acc + value, 0);
+
+console.log({ distances, parents, cost });
